@@ -311,35 +311,37 @@ $users_result = $conn->query($users_sql);
         </div>
     </div>
 
-    <!-- Upload Document Modal -->
-    <div id="uploadModal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-start sm:items-center p-4">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl my-4 sm:my-8 modal-content">
-            <div class="modal-header flex justify-between items-center p-6 sm:p-8">
-                <h2 class="text-2xl font-bold" style="color: #009246;">Register New Document</h2>
-                <button onclick="closeUploadModal()" class="text-gray-500 hover:text-gray-700 flex-shrink-0 ml-4">
-                    <i class="fas fa-times text-2xl"></i>
-                </button>
-            </div>
+   <!-- Upload Document Modal - Updated 2 Column Layout -->
+<div id="uploadModal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center p-4">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-5xl">
+        <div class="flex justify-between items-center p-6 border-b border-gray-200">
+            <h2 class="text-2xl font-bold" style="color: #009246;">Register New Document</h2>
+            <button onclick="closeUploadModal()" class="text-gray-500 hover:text-gray-700 flex-shrink-0 ml-4">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
 
-            <form id="uploadForm" method="POST" action="" class="modal-body p-6 sm:p-8 space-y-6">
-                <input type="hidden" name="action" value="upload">
-
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Document Date</label>
-                    <input type="date" name="document_date" required class="w-full px-4 py-2 border rounded-lg focus:outline-none" style="border-color: #ddd;">
-                </div>
-
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Document Name</label>
-                    <input type="text" name="document_name" required class="w-full px-4 py-2 border rounded-lg focus:outline-none" style="border-color: #ddd;" placeholder="Enter document name">
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form id="uploadForm" method="POST" action="">
+            <input type="hidden" name="action" value="upload">
+            
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Left Column -->
+                <div class="space-y-4">
                     <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Document Type</label>
-                        <select name="document_type" required class="w-full px-4 py-2 border rounded-lg focus:outline-none" style="border-color: #ddd;">
+                        <label class="block text-gray-700 font-semibold mb-2">Document Date <span class="text-red-500">*</span></label>
+                        <input type="date" name="document_date" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" style="border-color: #ddd;">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Document Name <span class="text-red-500">*</span></label>
+                        <input type="text" name="document_name" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" style="border-color: #ddd;" placeholder="Enter document name">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Document Type <span class="text-red-500">*</span></label>
+                        <select name="document_type" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" style="border-color: #ddd;">
                             <option value="">Select Document Type</option>
-                            <option value="Memo">Memo</option>
+                            <option value="Memo">Memorandum</option>
                             <option value="Report">Report</option>
                             <option value="Proposal">Proposal</option>
                             <option value="Letter">Letter</option>
@@ -349,43 +351,56 @@ $users_result = $conn->query($users_sql);
                             <option value="Other">Other</option>
                         </select>
                     </div>
+
                     <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Department</label>
-                        <input type="text" name="department" required class="w-full px-4 py-2 border rounded-lg focus:outline-none" style="border-color: #ddd;" placeholder="Enter department">
+                        <label class="block text-gray-700 font-semibold mb-2">Department <span class="text-red-500">*</span></label>
+                        <input type="text" name="department" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" style="border-color: #ddd;" placeholder="Enter department">
                     </div>
                 </div>
 
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Remarks</label>
-                    <textarea name="remarks" class="w-full px-4 py-2 border rounded-lg focus:outline-none" style="border-color: #ddd;" rows="3" placeholder="Enter remarks or additional notes"></textarea>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Right Column -->
+                <div class="space-y-4">
                     <div>
-                        <label class="block text-gray-700 font-semibold mb-2">From Who</label>
-                        <input type="text" name="from_who" required class="w-full px-4 py-2 border rounded-lg focus:outline-none" style="border-color: #ddd;" placeholder="Enter sender name">
+                        <label class="block text-gray-700 font-semibold mb-2">From Who <span class="text-red-500">*</span></label>
+                        <input type="text" name="from_who" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" style="border-color: #ddd;" placeholder="Enter sender name">
                     </div>
+
                     <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Received By</label>
-                        <input type="text" name="received_by" required class="w-full px-4 py-2 border rounded-lg focus:outline-none" style="border-color: #ddd;" placeholder="Enter receiver name">
+                        <label class="block text-gray-700 font-semibold mb-2">Received By <span class="text-red-500">*</span></label>
+                        <input type="text" name="received_by" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" style="border-color: #ddd;" placeholder="Enter receiver name">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Deadline</label>
+                        <input type="date" name="deadline" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" style="border-color: #ddd;">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Remarks</label>
+                        <textarea name="remarks" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" style="border-color: #ddd;" rows="4" placeholder="Enter remarks or additional notes"></textarea>
                     </div>
                 </div>
+            </div>
 
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Deadline (Optional)</label>
-                    <input type="date" name="deadline" class="w-full px-4 py-2 border rounded-lg focus:outline-none" style="border-color: #ddd;">
-                </div>
-
-            </form>
-
-            <div class="modal-footer flex flex-col sm:flex-row gap-3 p-6 sm:p-8">
-                <button type="submit" form="uploadForm" class="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold transition">
+            <div class="flex flex-col sm:flex-row gap-3 p-6 border-t border-gray-200 bg-gray-50">
+                <button type="submit" class="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg font-semibold transition">
                     <i class="fas fa-save mr-2"></i>Register Document
                 </button>
-                <button type="button" onclick="closeUploadModal()" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-lg font-semibold">Cancel</button>
+                <button type="button" onclick="closeUploadModal()" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-3 rounded-lg font-semibold">Cancel</button>
             </div>
-        </div>
+        </form>
     </div>
+</div>
+
+<style>
+/* Update modal styles */
+.modal {
+    display: none !important;
+}
+.modal.show {
+    display: flex !important;
+}
+</style>
 
     <!-- Edit Document Modal -->
     <div id="editModal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-start sm:items-center p-4">
